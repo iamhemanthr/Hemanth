@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/talentdb
+    username: talent
+    password: talent
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true

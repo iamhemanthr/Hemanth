@@ -1,0 +1,48 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: talentdb
+          POSTGRES_USER: talent
+          POSTGRES_PASSWORD: talent
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd="pg_isready -U talent -d talentdb"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+      - name: Build & Test (backend)
+        working-directory: backend
+        run: ./mvnw -q -DskipTests=false test
+      - name: Package JAR
+        working-directory: backend
+        run: ./mvnw -q -DskipTests package
+      - name: UI build
+        working-directory: ui
+        run: |
+          npm ci
+          npm run build
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            backend/target/*.jar
+            ui/dist
+            Postman/*.json

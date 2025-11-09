@@ -1,0 +1,18 @@
+# Java / Maven
+target/
+*.iml
+.idea/
+.mvn/wrapper/maven-wrapper.jar
+# Node
+node_modules/
+dist/
+# OS
+.DS_Store
+# Logs
+*.log
+# Vite
+ui/.vite
+ui/.vite-cache
+# Env
+*.env
+.env*

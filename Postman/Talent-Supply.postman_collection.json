@@ -1,0 +1,81 @@
+{
+  "info": {
+    "name": "Talent-Supply",
+    "_postman_id": "b8f7a9f0-0000-4d22-9c12-000000000001",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\": \"admin\", \"password\": \"Admin@123\"}"
+        }
+      }
+    },
+    {
+      "name": "Talents - Search",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/talents",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "talents"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Talents - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/talents",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "talents"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"phone\": \"9999999999\", \"primarySkill\": \"Java\", \"secondarySkills\": [\"Spring\", \"Docker\"], \"yearsExp\": 5, \"location\": \"BLR\", \"currentStatus\": \"AVAILABLE\"}"
+        }
+      }
+    }
+  ]
+}
